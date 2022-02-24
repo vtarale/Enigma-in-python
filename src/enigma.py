@@ -1,11 +1,11 @@
 class Rotor:
-    def __init__(self, gear, alphabets):
-        self.alhpabets = alphabets
+    def __init__(self, gear):
+        self.alphabets = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
         self.gear = gear
         self.steps = 0
 
     def get(self, val):
-        return self.alhpabets[val]
+        return self.alphabets[val]
 
     def move(self):
         new_list = []
@@ -16,7 +16,7 @@ class Rotor:
             new_list.append(letter)
             i  = i + 1
         self.steps  = self.steps + 1
-        new_list.append(self.alhpabets[0])
+        new_list.append(self.alphabets[0])
         self.alhpabets = new_list
 
 class PlungeBorad:
@@ -51,17 +51,21 @@ class PlungeBorad:
         }
     
     def get(self, char):
-        if self.connections(char):
-            return self.connections(char)
+        if self.connections[char]:
+            return self.connections[char]
         return char
 
 def move(r1, r2, r3):
-    pass
+    r1.move()
+    if r2.steps % 26 == r2.gear:
+        r2.move()
+        if r3.steps % 26 == r3.gear:
+            r3.move()
 
 def encrypt(string):
-    rotor1 = Rotor(None, ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'])
-    rotor2 = Rotor(12, ['z', 'y', 'x', 'w', 'v', 'u', 't', 's', 'r', 'q', 'p', 'o', 'n', 'm', 'l', 'k', 'j', 'i', 'h', 'g', 'f', 'e', 'd', 'c', 'b', 'a'])
-    rotor3 = Rotor(2, ['z', 'y', 'x', 'w', 'v', 'u', 't', 's', 'r', 'q', 'p', 'o', 'n', 'm', 'l', 'k', 'j', 'i', 'h', 'g', 'f', 'e', 'd', 'c', 'b', 'a'])
+    rotor1 = Rotor(None)
+    rotor2 = Rotor(12)
+    rotor3 = Rotor(2)
     pb = PlungeBorad()
     e = ""
     for char in string:
@@ -75,6 +79,9 @@ def encrypt(string):
         c = rotor3.get(start)
         c = rotor2.get(start)
         c = rotor1.get(start)
-        c = pb.get(char)
+        c = pb.get(c)
         e = e + c
     return e
+
+hello = encrypt("egg")
+print(hello)
