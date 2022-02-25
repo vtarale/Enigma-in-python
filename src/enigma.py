@@ -14,6 +14,13 @@ class Rotor1:
 
         for i in range(temp):
             self.move()
+
+    def find(self, char):
+        i = 0
+        for item in self.rotor:
+            if item == char:
+                return i
+            i = i + 1
         
     def get(self, val): #value is till 0-25
         return self.rotor[val]
@@ -30,5 +37,10 @@ class Rotor3(Rotor1):
             return True
         return False
     
-    def get_back(self):
-        return self.rotor[len(self.rotor)-1], len(self.rotor)-1
+    def get_back(self, val):
+        val = 25-val
+        return self.rotor[val], val
+
+class PlungeBorad:
+    def __init__(self):
+        pass
