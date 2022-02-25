@@ -32,6 +32,7 @@ class Rotor3(Rotor1):
             return True
         return False
     
+class Reflector(Rotor1):
     def get_back(self, char):
         index = self.alphabets.index(char)
         self.alphabets.reverse()
@@ -52,6 +53,7 @@ def encrpyt(string):
     r1 = Rotor1()
     r2 = Rotor2()
     r3 = Rotor3()
+    reflec = Reflector()
 
     r1.randomize()
     r2.randomize()
@@ -71,10 +73,10 @@ def encrpyt(string):
         c = r1.get(index)
         c = r2.get(index)
         c = r3.get(index)
-        c, index = r3.get_back(c)
-        c = r1.get(index)
-        c = r2.get(index)
+        c, index = reflec.get_back(c)
         c = r3.get(index)
+        c = r2.get(index)
+        c = r1.get(index)
         c = pborad.get(c)
         ans = ans+c
     
