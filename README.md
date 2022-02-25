@@ -4,7 +4,7 @@ enigma in python
     go to respective directory
     python3 enigma.py
  ## Remember
- not to put spaces in the messages
+ not to put spaces in the messages or uppercase letters, brackets etc.
 ## To know the history and more about enigma
 ### Wikipedia
 [wikipedia](https://en.wikipedia.org/wiki/Enigma_machine)
